@@ -1,7 +1,15 @@
+using PianoTeacherWebApp_Lab2_.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddDbContext<PianoTeacherAPIContext>(options => options.UseSqlServer(
+	builder.Configuration.GetConnectionString("DefaultConnection")
+		));
+	builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
@@ -17,6 +25,11 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+	app.UseEndpoints(endpoints =>
+	{
+		endpoints.MapControllers();
+	});
 
 app.UseAuthorization();
 
