@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography.X509Certificates;
 
 namespace PianoTeacherWebApp_Lab2_.Models
 {
@@ -11,5 +12,9 @@ namespace PianoTeacherWebApp_Lab2_.Models
 		public string Email { get; set; }
 		public string PhoneNumber { get; set; }
         public string AdditionalInfo { get; set; }
+
+		public int TeacherId { get; set; }
+
+		public int ParentId { get; set; }
 	}
 }

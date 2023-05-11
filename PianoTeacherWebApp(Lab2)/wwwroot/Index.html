@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UFT-8" />
+    <title>Informatics-2022-Lab2 Piano</title>
+	<link rel="stylesheet" href="css/site.css"/>
+</head>
+<body>
+	<h1>Informatics-2022-Lab2 Piano</h1>
+	<h3>Add Student</h3>
+	<form action="javascript:void(0);" method="POST" onsubmit="postStudent()">
+		<input type="text" id="add-name" placeholder="New Student">
+		<input type="text" id="add-information" placeholder="New Information">
+		<input type="submit" value="Add"
+		</form>
+	<div id="editStudent">
+		<h3>Edit</3>
+			<form action="javascript:void(0);" onsubmit="putStudent()">
+				<input type="hidden" id="edit-id">
+				<input type="text" id="edit-name">
+				<input type="information" id="edit-information">
+				<input type="submit" value="Save"
+				<a onclick="closeInput()" aria-label="Close">&#10006;</a>
+			</form>
+		</div>
+
+	<p id="counter"></p>
+
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Information</th>
+		</tr>
+		<tbody id="students"></tbody>
+	</table>
+
+	<script src="js/lab2.js" asp-append-version="true"</script>
+	<script type="text/javascript">
+		getStudents();
+	</script>
+</body>
+</html>
