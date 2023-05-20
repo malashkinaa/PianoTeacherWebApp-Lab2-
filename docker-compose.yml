@@ -1,0 +1,44 @@
+version: '3.4'
+
+services:
+  pianoteacherwebapplab2:
+    image: ${DOCKER_REGISTRY-}pianoteacherwebapplab2
+    build:
+      context: .
+      dockerfile: PianoTeacherWebApp(Lab2)/Dockerfile
+    depends_on:
+      - sqlserverService
+    networks:
+      - weathernet
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80;
+    ports:
+      - "80"
+      - "443"
+
+  
+  sqlserverService:
+    image: mcr.microsoft.com/mssql/server:latest
+    hostname: sqlserverService
+    container_name: sqlserverService
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: BigPassw0rd1
+    volumes:
+     - ./data/mssql:/var/opt/mssql3
+    ports:
+     - 1433:1433
+    networks:
+      - weathernet
+
+networks:
+  weathernet:
+    driver: bridge
+
+
+
+
+
+
+  
