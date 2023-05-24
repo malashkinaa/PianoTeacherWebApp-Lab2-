@@ -49,7 +49,7 @@ function displayStudents(data) {
 		td1.appendChild(textNode1);
 
 		let td2 = tr.insertCell(1);
-		let textNode2 = document.createTextNode(student.information);
+		let textNode2 = document.createTextNode(student.additionalInfo);
 		td2.appendChild(textNode2);
 
 		let td3 = tr.insertCell(2);
