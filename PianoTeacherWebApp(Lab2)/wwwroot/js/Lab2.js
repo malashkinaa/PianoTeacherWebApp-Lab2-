@@ -1,14 +1,25 @@
 ﻿let students = [];
+const studentsUri = 'api/Students';
+const gendersUri = 'api/Genders';
 
 function getStudents() {
-	fetch('api/Students')
+	fetch(studentsUri)
 		.then(response => response.json())
 		.then(data => displayStudents(data))
 		.catch(error => console.error('Unable to get students.', error));
 }
 
+function displayGenderName(id, callback) {
+	fetch(`${gendersUri}/${id}`)
+		.then(data => {
+			data.json().then(data => {
+				callback(data);
+			}
+			);
+		})
+}
 function getGenders() {
-	fetch('api/Genders')
+	fetch(gendersUri)
 		.then(response => response.json())
 		.then(data => {
 			displayGenders(data, 'edit-gender');
@@ -36,11 +47,11 @@ function displayStudents(data) {
 	data.forEach(student => {
 		let editButton = button.cloneNode(false);
 		editButton.innerText = 'Edit';
-		editButton.setAttribute('onclick', 'displayEditForm(${student.id})');
+		editButton.setAttribute('onclick', `displayEditForm(${student.id})`);
 
 		let deleteButton = button.cloneNode(false);
 		deleteButton.innerText = 'Delete';
-		deleteButton.setAttribute('onclick', 'deleteStudent(${student.id})');
+		deleteButton.setAttribute('onclick', `deleteStudent(${student.id})`);
 
 		let tr = tBody.insertRow();
 
@@ -65,8 +76,10 @@ function displayStudents(data) {
 		td5.appendChild(textNode5);
 
 		let td6 = tr.insertCell(5);
-		let textNode6 = document.createTextNode(student.genderId);
-		td6.appendChild(textNode6);
+		displayGenderName(student.genderId, function (gender) {
+			let textNode6 = document.createTextNode(gender.name);
+			td6.appendChild(textNode6);
+		});
 
 		let td7 = tr.insertCell(6);
 		td7.appendChild(editButton);
@@ -97,7 +110,7 @@ function addStudent() {
 		genderId: addGenderSelectbox.value,
 	};
 
-	fetch('api/Students', {
+	fetch(studentsUri, {
 		method: 'POST',
 		headers: {
 			'Accept': 'application/json',
@@ -116,3 +129,62 @@ function addStudent() {
 		.catch(error => console.error('Unable to add student.', error));
 }
 
+function deleteStudent(id) {
+	fetch(`${studentsUri}/${id}`, {
+		method: 'DELETE'
+	})
+		.then(() => getStudents())
+		.catch(error => console.error('Unable to delete student.', error));
+}
+
+function displayEditForm(id) {
+	const student = students.find(student => student.id === id);
+
+	document.getElementById('edit-id').value = student.id;
+	document.getElementById('edit-name').value = student.name;
+	document.getElementById('edit-information').value = student.additionalInfo;
+	document.getElementById('edit-age').value = student.age;
+	document.getElementById('edit-email').value = student.email; 
+	document.getElementById('edit-phone').value = student.phoneNumber; 
+	document.getElementById('edit-gender').value = student.genderId;
+	document.getElementById('editStudent').style.display = 'block';
+}
+
+function updateStudent() {
+	const editIdTextbox = document.getElementById('edit-id');
+	const editNameTextbox = document.getElementById('edit-name');
+	const editInfoTextbox = document.getElementById('edit-information');
+	const editAgeTextbox = document.getElementById('edit-age');
+	const editEmailTextbox = document.getElementById('edit-email');
+	const editTelTextbox = document.getElementById('edit-phone');
+	const editGenderSelectbox = document.getElementById('edit-gender');
+
+	const student = {
+		id: editIdTextbox.value.trim(),
+		name: editNameTextbox.value.trim(),
+		age: editAgeTextbox.value.trim(),
+		email: editEmailTextbox.value.trim(),
+		phoneNumber: editTelTextbox.value.trim(),
+		additionalInfo: editInfoTextbox.value.trim(),
+		teacherId: "1",
+		parentId: "1",
+		genderId: editGenderSelectbox.value,
+	};
+
+	fetch(`${studentsUri}/${student.id}`, {
+		method: 'PUT',
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(student)
+	})
+		.then(() => getStudents())
+		.catch(error => console.error('Unable to update student.', error));
+	closeInput();
+	return false;
+}
+
+function closeInput() {
+	document.getElementById('editStudent').style.display = 'none';
+}

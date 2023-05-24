@@ -18,9 +18,9 @@
 		<input type="submit" value="Add">
 	</form>
 
-	<div id="editStudent">
+	<div id="editStudent" style="display:none">
 		<h3>Edit</h3>
-		<form action="javascript:void(0);" onsubmit="putStudent()">
+		<form action="javascript:void(0);" onsubmit="updateStudent()" id="editForm" >
 			<input type="hidden" id="edit-id">
 			<input type="text" id="edit-name">
 			<input type="text" id="edit-information">

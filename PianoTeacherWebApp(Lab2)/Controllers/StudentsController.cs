@@ -98,13 +98,16 @@ namespace PianoTeacherWebApp_Lab2_.Controllers
 
 		// DELETE: api/Students/5
 		[HttpDelete("{id}")]
-		public async Task<IActionResult> DeleteStudent(int id)
+		public async Task<IActionResult> DeleteStudent(int? id)
 		{
-			if (_context.Students == null)
+			if (id == null || _context.Students == null)
 			{
 				return NotFound();
 			}
 			var student = await _context.Students.FindAsync(id);
+			//var student = await _context.Students.SingleOrDefaultAsync();
+			//var student = await _context.Students;
+
 			if (student == null)
 			{
 				return NotFound();
@@ -115,6 +118,25 @@ namespace PianoTeacherWebApp_Lab2_.Controllers
 
 			return NoContent();
 		}
+
+		//// POST: Students/Delete/5
+		//[HttpPost, ActionName("Delete")]
+		//[ValidateAntiForgeryToken]
+
+		//public async Task<IActionResult> DeleteConfirmed(int id)
+		//{
+		//	if (_context.Students == null)
+		//	{
+		//		return Problem("Entity set 'DbmedContext.Students'  is null.");
+		//	}
+		//	var student = await _context.Students.FindAsync(id);
+		//	if (student != null)
+		//	{
+		//		_context.Students.Remove(student);
+		//	}
+		//	await _context.SaveChangesAsync();
+		//	return RedirectToAction(nameof(Index));
+		//}
 
 		private bool StudentExists(int id)
 		{
