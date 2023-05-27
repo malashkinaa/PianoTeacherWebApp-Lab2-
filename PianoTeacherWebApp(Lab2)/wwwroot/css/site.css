@@ -14,5 +14,22 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+	margin-bottom: 60px;
+	background-image: url("https://images4.alphacoders.com/477/47766.jpg");
+	background-size: 1200px;
+	color: #ddd;
+}
+
+input[type=submit], button {
+	color: #fff;
+	background: #e91e1e00;
+	padding: 7px 22px;
+	margin: 0 0 0 15px;
+	border-radius: 50px;
+	border: 2px solid #f82249;
+	transition: all ease-in-out 0.3s;
+	font-weight: 500;
+	line-height: 1;
+	font-size: 13px;
+	white-space: nowrap;
 }
