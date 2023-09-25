@@ -15,12 +15,13 @@
 		<input type="email" id="add-email" placeholder="New Email">
 		<input type="text" id="add-phone" placeholder="New PhoneNumber">
 		<select id="add-gender" />
+		<input type="file" id="add-file" placeholder="New File">
 		<input type="submit" class="button" value="Add">
 	</form>
 
 	<div id="editStudent" style="display:none">
 		<h3>Edit</h3>
-		<form action="javascript:void(0);" onsubmit="updateStudent()" id="editForm" >
+		<form action="javascript:void(0);" onsubmit="updateStudent()" id="editForm">
 			<input type="hidden" id="edit-id">
 			<input type="text" id="edit-name">
 			<input type="text" id="edit-information">
@@ -28,6 +29,7 @@
 			<input type="email" id="edit-email">
 			<input type="text" id="edit-phone">
 			<select id="edit-gender" />
+			<input type="file" id="edit-file">
 			<input type="submit" value="Save">
 			<a onclick="closeInput()" aria-label="Close">&#10006;</a>
 		</form>
@@ -43,6 +45,7 @@
 			<th>Email</th>
 			<th>Phone</th>
 			<th>Gender</th>
+			<th>Note Sheets</th>
 			<th></th>
 			<th></th>
 		</tr>

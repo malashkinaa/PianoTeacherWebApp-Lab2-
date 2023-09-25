@@ -16,5 +16,7 @@ namespace PianoTeacherWebApp_Lab2_.Models
 		public int? TeacherId { get; set; }
 
 		public int? ParentId { get; set; }
+
+		public string? NoteSheetFile { get; set; }
 	}
 }

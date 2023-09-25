@@ -82,10 +82,14 @@ function displayStudents(data) {
 		});
 
 		let td7 = tr.insertCell(6);
-		td7.appendChild(editButton);
+		let textNode7 = document.createTextNode(student.noteSheetFile);
+		td7.appendChild(textNode7);
 
 		let td8 = tr.insertCell(7);
-		td8.appendChild(deleteButton);
+		td8.appendChild(editButton);
+
+		let td9 = tr.insertCell(8);
+		td9.appendChild(deleteButton);
 	});
 
 	students = data;
@@ -98,6 +102,7 @@ function addStudent() {
 	const addEmailTextbox = document.getElementById('add-email');
 	const addTelTextbox = document.getElementById('add-phone');
 	const addGenderSelectbox = document.getElementById('add-gender');
+	const addNoteSheetbox = document.getElementById('add-file');
 
 	const student = {
 		name: addNameTextbox.value.trim(),
@@ -108,8 +113,9 @@ function addStudent() {
 		teacherId: "1",
 		parentId: "1",
 		genderId: addGenderSelectbox.value,
+		noteSheetFile: addNoteSheetbox.value.trim(),
 	};
-
+	 
 	fetch(studentsUri, {
 		method: 'POST',
 		headers: {
@@ -125,6 +131,7 @@ function addStudent() {
 			addAgeTextbox.value = "";
 			addEmailTextbox.value = "";
 			addTelTextbox.value = "";
+			addNoteSheetbox.value = "";
 		})
 		.catch(error => console.error('Unable to add student.', error));
 }
@@ -158,6 +165,7 @@ function updateStudent() {
 	const editEmailTextbox = document.getElementById('edit-email');
 	const editTelTextbox = document.getElementById('edit-phone');
 	const editGenderSelectbox = document.getElementById('edit-gender');
+	const editNoteShetTextbox = document.getElementById('edit-file');
 
 	const student = {
 		id: editIdTextbox.value.trim(),
@@ -169,6 +177,7 @@ function updateStudent() {
 		teacherId: "1",
 		parentId: "1",
 		genderId: editGenderSelectbox.value,
+		noteSheetFile: editNoteShetTextbox.value.trim(),
 	};
 
 	fetch(`${studentsUri}/${student.id}`, {
