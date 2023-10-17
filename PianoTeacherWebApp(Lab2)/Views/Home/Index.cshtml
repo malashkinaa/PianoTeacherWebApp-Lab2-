@@ -1,0 +1,62 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-left">
+	<h3>Add Student</h3>
+	<form action="javascript:void(0);" method="POST" onsubmit="addStudent()">
+		<input type="text" id="add-name" placeholder="New Student" required>
+		<input type="text" id="add-information" placeholder="New Information">
+		<input type="text" id="add-age" placeholder="New Age" required>
+		<input type="email" id="add-email" placeholder="New Email">
+		<input type="text" id="add-phone" placeholder="New PhoneNumber">
+		<select id="add-gender" />
+		<input type="file" id="add-file" placeholder="New File">
+		<input type="submit" class="button" value="Add">
+	</form>
+
+	<div id="editStudent" style="display:none">
+		<h3>Edit</h3>
+		<form action="javascript:void(0);" onsubmit="updateStudent()" id="editForm">
+			<input type="hidden" id="edit-id">
+			<input type="text" id="edit-name">
+			<input type="text" id="edit-information">
+			<input type="text" id="edit-age">
+			<input type="email" id="edit-email">
+			<input type="text" id="edit-phone">
+			<select id="edit-gender" />
+			<input type="file" id="edit-file">
+			<input type="submit" value="Save">
+			<a onclick="closeInput()" aria-label="Close">&#10006;</a>
+		</form>
+	</div>
+
+	<p id="counter"></p>
+
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Information</th>
+			<th>Age</th>
+			<th>Email</th>
+			<th>Phone</th>
+			<th>Gender</th>
+			<th>Note Sheets</th>
+			<th></th>
+			<th></th>
+		</tr>
+		<tbody id="students"></tbody>
+	</table>
+
+	<script src="~/js/lab2.js" asp-append-version="true"></script>
+	<script type="text/javascript">
+		getGenders();
+		getStudents();
+	</script>
+
+</div>
+
+<div class="text-left">
+	<h3>This is the location of the lessons:</h3>
+	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4517.331652717785!2d30.21557951188994!3d50.54780124384923!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472b31bc3c3d7cf1%3A0x8a25c0d09cd9a99e!2sChildren&#39;s%20Art%20School%20named%20after%20Lev%20Revutskogo!5e0!3m2!1sru!2sdk!4v1696607329077!5m2!1sru!2sdk" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>	
