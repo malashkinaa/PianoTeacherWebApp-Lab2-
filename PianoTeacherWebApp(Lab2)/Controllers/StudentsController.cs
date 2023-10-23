@@ -3,20 +3,23 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PianoTeacherWebApp_Lab2_.Data;
 using PianoTeacherWebApp_Lab2_.Models;
 
 namespace PianoTeacherWebApp_Lab2_.Controllers
 {
-	[Route("api/[controller]")]
+    [Route("api/[controller]")]
 	[ApiController]
+	[Authorize]
 	public class StudentsController : ControllerBase
 	{
-		private readonly PianoTeacherAPIContext _context;
+		private readonly PianoTeacherDBContext _context;
 
-		public StudentsController(PianoTeacherAPIContext context)
+		public StudentsController(PianoTeacherDBContext context)
 		{
 			_context = context;
 		}
@@ -93,8 +96,8 @@ namespace PianoTeacherWebApp_Lab2_.Controllers
 			_context.Students.Add(student);
 			await _context.SaveChangesAsync();
 
-			return CreatedAtAction("GetStudent", new { id = student.Id }, student);
-		}
+			return CreatedAtAction("PostStudent", new { id = student.Id }, student);
+		}	
 
 		// DELETE: api/Students/5
 		[HttpDelete("{id}")]

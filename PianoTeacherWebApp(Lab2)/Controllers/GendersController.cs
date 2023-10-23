@@ -3,20 +3,23 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PianoTeacherWebApp_Lab2_.Data;
 using PianoTeacherWebApp_Lab2_.Models;
 
 namespace PianoTeacherWebApp_Lab2_.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GendersController : ControllerBase
+	[Authorize]
+	public class GendersController : ControllerBase
     {
-        private readonly PianoTeacherAPIContext _context;
+        private readonly PianoTeacherDBContext _context;
 
-        public GendersController(PianoTeacherAPIContext context)
+        public GendersController(PianoTeacherDBContext context)
         {
             _context = context;
         }

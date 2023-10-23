@@ -1,18 +1,17 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PianoTeacherWebApp_Lab2_.Data;
-using PianoTeacherWebApp_Lab2_.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddDbContext<PianoTeacherAPIContext>(options =>
+builder.Services.AddDbContext<PianoTeacherDBContext>(options =>
 	options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-	.AddEntityFrameworkStores<PianoTeacherAPIContext>();
+	.AddEntityFrameworkStores<PianoTeacherDBContext>();
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddAuthentication()

@@ -9,7 +9,7 @@ using System;
 
 namespace PianoTeacherWebApp_Lab2_.Data.Migrations
 {
-	[DbContext(typeof(ApplicationDbContext))]
+	[DbContext(typeof(PianoTeacherDBContext))]
 	[Migration("00000000000000_CreateIdentitySchema")]
 	partial class CreateIdentitySchema
 	{
