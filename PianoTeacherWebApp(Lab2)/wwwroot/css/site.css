@@ -31,11 +31,21 @@ input[type=submit], button {
 	line-height: 1;
 	font-size: 13px;
 	white-space: nowrap;
+	cursor: pointer;
+	position: relative;
+	z-index: 1;
 }
+
+input[type=submit]:hover, button:hover {
+	background: #e91e1e;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 
 .google-map {
 	padding-bottom: 50%;
 	position: relative;
+	color: black
 }
 
 	.google-map iframe {
