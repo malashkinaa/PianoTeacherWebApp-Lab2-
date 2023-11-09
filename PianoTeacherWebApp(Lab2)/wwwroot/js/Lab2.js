@@ -197,3 +197,10 @@ function updateStudent() {
 function closeInput() {
 	document.getElementById('editStudent').style.display = 'none';
 }
+
+var gmarkers1 = [];
+var markers1 = [];
+var infowindow = new google.maps.InfoWindow({
+	content: ''
+});
+
